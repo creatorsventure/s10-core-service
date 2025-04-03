@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s10-core-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.11-SNAPSHOT</version>
     <name>s10-core-service</name>
     <description>s10-core-service</description>
     <url/>
@@ -31,12 +31,14 @@
         <maven.build.timestamp.format>ddMMyyyyHHmmss</maven.build.timestamp.format>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <org.projectlombok.version>1.18.36</org.projectlombok.version>
+        <bouncycastle.version>1.80</bouncycastle.version>
+        <jwt.version>0.11.5</jwt.version>
     </properties>
     <distributionManagement>
         <repository>
-            <id>github-s01-core-service</id>
+            <id>github-s10-core-service</id>
             <name>${project.name} Maven Packages</name>
-            <url>https://maven.pkg.github.com/creatorsventure/s01-core-service</url>
+            <url>https://maven.pkg.github.com/creatorsventure/s10-core-service</url>
         </repository>
     </distributionManagement>
     <dependencies>
@@ -79,6 +81,28 @@
             <groupId>com.googlecode.libphonenumber</groupId>
             <artifactId>libphonenumber</artifactId>
             <version>8.12.45</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>${bouncycastle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId> <!-- for JSON parsing -->
+            <version>${jwt.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
