@@ -22,6 +22,6 @@ public class CoreSecurityProperties {
     private KeyAliasConfigDto keystoreCurrentAlias;
     private List<KeyAliasConfigDto> keystoreOldAliases;
     private String JWTSecret;
-    private Long JWTAccessTokenExpirationMs;
-    private Long JWTRefreshTokenExpirationMs;
+    private Long JWTAccessTokenExpirationMins;
+    private Long JWTRefreshTokenExpirationMins;
 }

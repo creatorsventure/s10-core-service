@@ -11,8 +11,10 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 public class AuthInfoDto {
-    private String username;
+    private String userId;
     private String password;
     private String email;
     private List<String> organizationIds;
+    private String token;
+    private String refreshToken;
 }

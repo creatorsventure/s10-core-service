@@ -15,6 +15,7 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 @Component
@@ -37,7 +38,9 @@ public class JWTComponent {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + coreSecurityProperties.getJWTAccessTokenExpirationMs()))
+                .setExpiration(new Date(
+                        System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(
+                                coreSecurityProperties.getJWTRefreshTokenExpirationMins())))
                 .signWith(signingKey, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -46,7 +49,8 @@ public class JWTComponent {
         return Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + coreSecurityProperties.getJWTRefreshTokenExpirationMs()))
+                .setExpiration(new Date(System.currentTimeMillis() +
+                        TimeUnit.MINUTES.toMillis(coreSecurityProperties.getJWTRefreshTokenExpirationMins())))
                 .signWith(signingKey, SignatureAlgorithm.HS256)
                 .compact();
     }
