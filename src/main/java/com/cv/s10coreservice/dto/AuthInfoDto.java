@@ -15,6 +15,7 @@ public class AuthInfoDto {
     private String password;
     private String email;
     private List<String> organizationIds;
+    private List<String> roleIds;
     private String token;
     private String refreshToken;
 }
