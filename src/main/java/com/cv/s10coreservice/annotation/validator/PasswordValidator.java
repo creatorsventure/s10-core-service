@@ -38,49 +38,49 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Obj
             context.disableDefaultConstraintViolation();
 
             if (!password.equals(confirmPassword)) {
-                context.buildConstraintViolationWithTemplate("{password.mismatch}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.notmatch}")
                         .addPropertyNode(confirmPasswordField)
                         .addConstraintViolation();
                 isValid = false;
             }
 
             if (password.length() < 8 || password.length() > 16) {
-                context.buildConstraintViolationWithTemplate("{password.length}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.length}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
             }
 
             if (!UPPER.matcher(password).matches()) {
-                context.buildConstraintViolationWithTemplate("{password.uppercase}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.uppercase}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
             }
 
             if (!LOWER.matcher(password).matches()) {
-                context.buildConstraintViolationWithTemplate("{password.lowercase}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.lowercase}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
             }
 
             if (!DIGIT.matcher(password).matches()) {
-                context.buildConstraintViolationWithTemplate("{password.digit}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.uppercase.digit}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
             }
 
             if (!SPECIAL.matcher(password).matches()) {
-                context.buildConstraintViolationWithTemplate("{password.special}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.special}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
             }
 
             if (WHITESPACE.matcher(password).matches()) {
-                context.buildConstraintViolationWithTemplate("{password.whitespace}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.whitespace}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
