@@ -15,6 +15,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -24,7 +26,10 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "modifiedAt"}, allowGetters = true)
-public abstract class GenericEntity {
+public abstract class GenericEntity implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 8544488213211910532L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -33,7 +38,7 @@ public abstract class GenericEntity {
 
     @Column
     @NotBlank(message = "${app.message.failure.blank}")
-    @NotNull(message = "${app.message.failure.null}")
+    @NotNull(message = "${app.message.failure.blank}")
     private String name;
 
     @Column

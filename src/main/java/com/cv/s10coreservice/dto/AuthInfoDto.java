@@ -2,6 +2,8 @@ package com.cv.s10coreservice.dto;
 
 import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -10,7 +12,11 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class AuthInfoDto {
+public class AuthInfoDto implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 8553698601517438499L;
+
     private String userId;
     private String password;
     private String email;

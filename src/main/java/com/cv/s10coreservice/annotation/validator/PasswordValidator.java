@@ -38,7 +38,7 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Obj
             context.disableDefaultConstraintViolation();
 
             if (!password.equals(confirmPassword)) {
-                context.buildConstraintViolationWithTemplate("{app.message.failure.password.notmatch}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.different}")
                         .addPropertyNode(confirmPasswordField)
                         .addConstraintViolation();
                 isValid = false;

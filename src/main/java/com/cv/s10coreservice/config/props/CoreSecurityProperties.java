@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Configuration
 @ConfigurationProperties(prefix = "security")
-@PropertySource("classpath:security.properties")
 public class CoreSecurityProperties {
     private String keystorePath;
     private String keystorePassword;
