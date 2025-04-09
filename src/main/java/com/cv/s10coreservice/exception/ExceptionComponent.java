@@ -1,18 +1,20 @@
 package com.cv.s10coreservice.exception;
 
 import lombok.AllArgsConstructor;
-import org.springframework.core.env.Environment;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
 public class ExceptionComponent {
-    private final Environment environment;
 
-    public ApplicationException expose(String message, Boolean isProperty) {
+    private MessageSource messageSource;
+
+    public ApplicationException expose(String msgOrKey, Boolean isProperty, Object... args) {
         if (isProperty) {
-            message = environment.getProperty(message);
+            msgOrKey = messageSource.getMessage(msgOrKey, args, LocaleContextHolder.getLocale());
         }
-        return new ApplicationException(message);
+        return new ApplicationException(msgOrKey);
     }
 }

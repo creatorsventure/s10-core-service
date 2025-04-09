@@ -37,8 +37,8 @@ public abstract class GenericEntity implements Serializable {
     private String id;
 
     @Column
-    @NotBlank(message = "${app.message.failure.blank}")
-    @NotNull(message = "${app.message.failure.blank}")
+    @NotBlank(message = "{app.message.failure.blank}")
+    @NotNull(message = "{app.message.failure.blank}")
     private String name;
 
     @Column

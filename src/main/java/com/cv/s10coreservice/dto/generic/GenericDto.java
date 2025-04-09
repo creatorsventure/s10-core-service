@@ -22,9 +22,9 @@ public abstract class GenericDto implements Serializable {
     private static final long serialVersionUID = -3006996075416773979L;
 
     private String id;
-    @NotBlank(message = "${app.message.failure.blank}")
-    @NotNull(message = "${app.message.failure.blank}")
-    @Size(min = 3, max = 250, message = "${app.message.failure.size}")
+    @NotBlank(message = "{app.message.failure.blank}")
+    @NotNull(message = "{app.message.failure.blank}")
+    @Size(min = 3, max = 250, message = "{app.message.failure.size}")
     private String name;
     private String description;
     private boolean status;

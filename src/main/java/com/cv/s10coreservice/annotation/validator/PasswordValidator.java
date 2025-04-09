@@ -66,7 +66,7 @@ public class PasswordValidator implements ConstraintValidator<ValidPassword, Obj
             }
 
             if (!DIGIT.matcher(password).matches()) {
-                context.buildConstraintViolationWithTemplate("{app.message.failure.password.uppercase.digit}")
+                context.buildConstraintViolationWithTemplate("{app.message.failure.password.digit}")
                         .addPropertyNode(passwordField)
                         .addConstraintViolation();
                 isValid = false;
