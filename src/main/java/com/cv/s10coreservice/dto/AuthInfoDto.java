@@ -18,6 +18,7 @@ public class AuthInfoDto implements Serializable {
     private static final long serialVersionUID = 8553698601517438499L;
 
     private String userId;
+    private String name;
     private String password;
     private String email;
     private List<String> organizationIds;
