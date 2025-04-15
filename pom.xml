@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s10-core-service</artifactId>
-    <version>0.0.47-SNAPSHOT</version>
+    <version>0.0.48-SNAPSHOT</version>
     <name>s10-core-service</name>
     <description>s10-core-service</description>
     <url/>
@@ -36,7 +36,7 @@
     </properties>
     <distributionManagement>
         <repository>
-            <id>github-s10-core-service</id>
+            <id>github</id>
             <name>${project.name} Maven Packages</name>
             <url>https://maven.pkg.github.com/creatorsventure/s10-core-service</url>
         </repository>
