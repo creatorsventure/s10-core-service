@@ -2,7 +2,7 @@ package com.cv.s10coreservice.constant;
 
 public class ApplicationConstant {
 
-    public static final String APPLICATION_NOT_APPLICABLE = "NA";
+    public static final String NOT_APPLICABLE = "NA";
 
     public static final String APPLICATION_MIGRATION_USER = "MIGRATION_USER";
     public static final String APPLICATION_UNKNOWN_USER = "UNKNOWN_USER";
@@ -21,7 +21,6 @@ public class ApplicationConstant {
 
     public static final int MENU_TYPE_PARENT = 1;
     public static final int MENU_TYPE_CHILD = 2;
-
 
 
 }

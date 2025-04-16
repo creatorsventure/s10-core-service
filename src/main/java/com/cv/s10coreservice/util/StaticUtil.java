@@ -1,7 +1,10 @@
 package com.cv.s10coreservice.util;
 
+import com.cv.s10coreservice.constant.ApplicationConstant;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.security.Security;
 
@@ -19,5 +22,11 @@ public class StaticUtil {
             initialized = true;
         }
         return initialized;
+    }
+
+    public static String extractHeader(String header) throws Exception {
+        return RequestContextHolder.getRequestAttributes() instanceof ServletRequestAttributes
+                ? ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getHeader(header)
+                : ApplicationConstant.NOT_APPLICABLE;
     }
 }
