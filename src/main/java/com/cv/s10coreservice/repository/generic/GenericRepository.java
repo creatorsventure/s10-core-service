@@ -12,5 +12,4 @@ public interface GenericRepository {
     <T> Optional<List<T>> findAllByStatusTrueAndIdIn(List<String> ids, Class<T> modelType);
 
     <T> Optional<List<T>> findAllByStatusTrue(Class<T> modelType);
-
 }
