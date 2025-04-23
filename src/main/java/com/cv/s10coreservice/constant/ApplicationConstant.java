@@ -3,6 +3,7 @@ package com.cv.s10coreservice.constant;
 public class ApplicationConstant {
 
     public static final String NOT_APPLICABLE = "NA";
+    public static final String X_HEADER_USER_ID = "X-USER-ID";
 
     public static final String APPLICATION_MIGRATION_USER = "MIGRATION_USER";
     public static final String APPLICATION_UNKNOWN_USER = "UNKNOWN_USER";
@@ -22,6 +23,25 @@ public class ApplicationConstant {
 
     public static final int MENU_TYPE_PARENT = 1;
     public static final int MENU_TYPE_CHILD = 2;
+
+    public static final String APP_NAVIGATION_API_DASHBOARD = "/dashboard";
+    public static final String APP_NAVIGATION_API_MENU = "/menu";
+    public static final String APP_NAVIGATION_API_MENU_TREE = "/menu-tree";
+    public static final String APP_NAVIGATION_API_SIGNUP = "/sign-up";
+    public static final String APP_NAVIGATION_API_AUTHENTICATION = "/authentication";
+    public static final String APP_NAVIGATION_API_AUTHENTICATION_LOGIN = "/login";
+    public static final String APP_NAVIGATION_API_AUTHENTICATION_REFRESH_TOKEN = "/refresh-token";
+    public static final String APP_NAVIGATION_API_AUTHENTICATION_LOGOUT = "/logout";
+    public static final String APP_NAVIGATION_API_USER_DETAIL = "/user";
+    public static final String APP_NAVIGATION_API_USER_DETAIL_COUNT = "/count";
+    public static final String APP_NAVIGATION_API_ROLE = "/role";
+    public static final String APP_NAVIGATION_API_ROLE_LOAD_MENU = "/load-role-menu";
+    public static final String APP_NAVIGATION_API_PASSWORD = "/password";
+    public static final String APP_NAVIGATION_API_PASSWORD_ACTIVATE_ACCOUNT = "/activate-account";
+    public static final String APP_NAVIGATION_API_PASSWORD_FORGOT = "/forgot-password";
+    public static final String APP_NAVIGATION_API_PASSWORD_RESET = "/reset-password";
+    public static final String APP_NAVIGATION_API_PASSWORD_RESEND_EMAIL = "/resend-password-email";
+    public static final String APP_NAVIGATION_API_PERMISSION = "/permission";
 
 
 }
