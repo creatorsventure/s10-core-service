@@ -21,8 +21,8 @@ public class AuthInfoDto implements Serializable {
     private String name;
     private String password;
     private String email;
-    private List<String> organizationIds;
-    private List<String> roleIds;
+    private String organizationId;
+    private String roleId;
     private List<String> permissions;
     private String token;
     private String refreshToken;
