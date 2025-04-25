@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s10-core-service</artifactId>
-    <version>0.0.67-SNAPSHOT</version>
+    <version>0.0.68-SNAPSHOT</version>
     <name>s10-core-service</name>
     <description>s10-core-service</description>
     <url/>

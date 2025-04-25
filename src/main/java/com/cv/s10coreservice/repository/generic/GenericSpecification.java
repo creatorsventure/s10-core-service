@@ -13,9 +13,42 @@ public interface GenericSpecification<T> {
         return (root, query, builder) -> {
             if (StringUtils.isNumeric(searchValue)) {
                 return builder.equal(root.get(searchField), searchValue);
-
             } else {
                 return builder.like(builder.upper(root.get(searchField)), "%" + searchValue.toUpperCase() + "%");
+            }
+        };
+    }
+
+    default Specification<T> searchSpec(String searchField, String searchValue, String unitId) {
+        return (root, query, builder) -> {
+            if (StringUtils.isNumeric(searchValue)) {
+                return builder.and(
+                        builder.equal(root.get(searchField), searchValue),
+                        builder.equal(root.get("unitId"), unitId)
+                );
+            } else {
+                return builder.and(
+                        builder.like(builder.upper(root.get(searchField)), "%" + searchValue.toUpperCase() + "%"),
+                        builder.equal(root.get("unitId"), unitId)
+                );
+            }
+        };
+    }
+
+    default Specification<T> searchSpec(String searchField, String searchValue, String unitId, String merchantId) {
+        return (root, query, builder) -> {
+            if (StringUtils.isNumeric(searchValue)) {
+                return builder.and(
+                        builder.equal(root.get(searchField), searchValue),
+                        builder.equal(root.get("unitId"), unitId),
+                        builder.equal(root.get("merchantId"), merchantId)
+                );
+            } else {
+                return builder.and(
+                        builder.like(builder.upper(root.get(searchField)), "%" + searchValue.toUpperCase() + "%"),
+                        builder.equal(root.get("unitId"), unitId),
+                        builder.equal(root.get("merchantId"), merchantId)
+                );
             }
         };
     }
