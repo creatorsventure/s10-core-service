@@ -4,6 +4,12 @@ public class ApplicationConstant {
 
     public static final String NOT_APPLICABLE = "NA";
     public static final String X_HEADER_USER_ID = "X-USER-ID";
+    public static final String X_HEADER_ORGANIZATION_ID = "X-ORGANIZATION-ID";
+    public static final String X_HEADER_UNIT_ID = "X-UNIT-ID";
+    public static final String X_HEADER_MERCHANT_ID = "X-MERCHANT-ID";
+    public static final String X_HEADER_SUPER_MERCHANT_ID = "X-SUPER-MERCHANT-ID";
+    public static final String HIBERNATE_UNIT_FILTER_NAME = "unitFilter";
+    public static final String HIBERNATE_MERCHANT_FILTER_NAME = "merchantFilter";
 
     public static final String APPLICATION_MIGRATION_USER = "MIGRATION_USER";
     public static final String APPLICATION_UNKNOWN_USER = "UNKNOWN_USER";
@@ -28,6 +34,8 @@ public class ApplicationConstant {
     public static final String APP_NAVIGATION_API_MENU = "/menu";
     public static final String APP_NAVIGATION_API_MENU_TREE = "/menu-tree";
     public static final String APP_NAVIGATION_API_SIGNUP = "/sign-up";
+    public static final String APP_NAVIGATION_API_VERIFY_SIGNUP = "/verify-sign-up";
+    public static final String APP_NAVIGATION_API_VERIFY_OTP = "/verify-otp";
     public static final String APP_NAVIGATION_API_AUTHENTICATION = "/authentication";
     public static final String APP_NAVIGATION_API_AUTHENTICATION_LOGIN = "/login";
     public static final String APP_NAVIGATION_API_AUTHENTICATION_REFRESH_TOKEN = "/refresh-token";

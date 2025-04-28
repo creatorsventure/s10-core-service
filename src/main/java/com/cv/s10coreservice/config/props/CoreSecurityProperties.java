@@ -22,4 +22,8 @@ public class CoreSecurityProperties {
     private String JWTSecret;
     private Long JWTAccessTokenExpirationMins;
     private Long JWTRefreshTokenExpirationMins;
+    private Integer emailLinkExpiryHrs;
+    private Integer otpExpiryMins;
+
+
 }
