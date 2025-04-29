@@ -10,18 +10,16 @@ import java.util.HexFormat;
 @Component
 public class Sha256HashComponent {
 
-    private final MessageDigest messageDigest;
-
-    public Sha256HashComponent() {
+    private final ThreadLocal<MessageDigest> threadLocalDigest = ThreadLocal.withInitial(() -> {
         try {
-            this.messageDigest = MessageDigest.getInstance("SHA-256");
+            return MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException("SHA-256 not available on this platform", e);
+            throw new IllegalStateException("SHA-256 algorithm not available", e);
         }
-    }
+    });
 
     public String hash(String input) {
-        byte[] hashBytes = messageDigest.digest(input.getBytes(StandardCharsets.UTF_8));
+        byte[] hashBytes = threadLocalDigest.get().digest(input.getBytes(StandardCharsets.UTF_8));
         return HexFormat.of().formatHex(hashBytes); // Requires Java 17+
     }
 

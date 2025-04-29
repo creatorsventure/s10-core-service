@@ -13,4 +13,10 @@ public enum APIResponseType {
         this.value = value;
     }
 
+    public static APIResponseType fromValue(int value) {
+        for (APIResponseType type : values()) {
+            if (type.getValue() == value) return type;
+        }
+        throw new IllegalArgumentException("Unknown APIResponseType value: " + value);
+    }
 }

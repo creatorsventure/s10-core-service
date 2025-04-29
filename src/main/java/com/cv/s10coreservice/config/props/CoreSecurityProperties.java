@@ -24,6 +24,7 @@ public class CoreSecurityProperties {
     private Long JWTRefreshTokenExpirationMins;
     private Integer emailLinkExpiryHrs;
     private Integer otpExpiryMins;
-
+    private Integer defaultCacheExpiryMins;
+    private Integer feignCacheExpiryMins;
 
 }
