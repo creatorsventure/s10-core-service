@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s10-core-service</artifactId>
-    <version>0.0.67-SNAPSHOT</version>
+    <version>0.0.312-SNAPSHOT</version>
     <name>s10-core-service</name>
     <description>s10-core-service</description>
     <url/>
@@ -103,6 +103,16 @@
             <artifactId>jjwt-jackson</artifactId> <!-- for JSON parsing -->
             <version>${jwt.version}</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>dnsjava</groupId>
+            <artifactId>dnsjava</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>3.1.6</version>
         </dependency>
     </dependencies>
 
