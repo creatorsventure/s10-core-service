@@ -22,7 +22,9 @@ public class AuthInfoDto implements Serializable {
     private String password;
     private String email;
     private String organizationId;
+    private String unitCode;
     private String unitId;
+    private String merchantCode;
     private String merchantId;
     private String roleId;
     private List<String> permissions;

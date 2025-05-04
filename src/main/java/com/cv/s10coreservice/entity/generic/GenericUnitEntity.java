@@ -23,7 +23,7 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @MappedSuperclass
 @FilterDef(name = ApplicationConstant.HIBERNATE_UNIT_FILTER_NAME, parameters = {
-        @ParamDef(name = "unitId", type = String.class)
+        @ParamDef(name = ApplicationConstant.HIBERNATE_PARAM_UNIT_ID, type = String.class)
 })
 @Filter(name = ApplicationConstant.HIBERNATE_UNIT_FILTER_NAME, condition = "unit_id = :unitId")
 public abstract class GenericUnitEntity extends GenericEntity implements Serializable {

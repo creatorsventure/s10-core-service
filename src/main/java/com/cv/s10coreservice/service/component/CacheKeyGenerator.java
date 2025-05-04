@@ -18,9 +18,6 @@ public class CacheKeyGenerator implements KeyGenerator {
     @Value("${spring.application.name}")
     private String appName;
 
-    @Value("${spring.application.version:vx}")
-    private String appVersion;
-
     private final Sha256HashComponent hashComponent;
 
     @Override
@@ -30,16 +27,13 @@ public class CacheKeyGenerator implements KeyGenerator {
         // 1. Add Application Name
         keyBuilder.append(appName != null ? appName : "app").append(":");
 
-        // 2. Add Custom Prefix
-        keyBuilder.append(appVersion).append(":");
-
-        // 3. Add Class and Method Name
+        // 2. Add Class and Method Name
         keyBuilder.append(target.getClass().getSimpleName())
                 .append("_")
                 .append(method.getName())
                 .append("_");
 
-        // 4. Handle Parameters
+        // 3. Handle Parameters
         String paramString;
         if (params.length > 0) {
             paramString = Arrays.stream(params)
@@ -51,8 +45,8 @@ public class CacheKeyGenerator implements KeyGenerator {
         }
 
         // 5. Final Key
-        keyBuilder.append("HASH_").append(hashComponent.hash(paramString));
+        keyBuilder.append("hash_").append(hashComponent.hash(paramString));
 
-        return keyBuilder.toString();
+        return keyBuilder.toString().toLowerCase();
     }
 }

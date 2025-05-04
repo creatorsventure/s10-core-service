@@ -3,21 +3,33 @@ package com.cv.s10coreservice.constant;
 public class ApplicationConstant {
 
     public static final String NOT_APPLICABLE = "NA";
+    public static final String X_HEADER_USER_NAME = "X-USER-NAME";
     public static final String X_HEADER_USER_ID = "X-USER-ID";
     public static final String X_HEADER_ORGANIZATION_ID = "X-ORGANIZATION-ID";
     public static final String X_HEADER_UNIT_ID = "X-UNIT-ID";
+    public static final String X_HEADER_UNIT_CODE = "X-UNIT-CODE";
     public static final String X_HEADER_MERCHANT_ID = "X-MERCHANT-ID";
+    public static final String X_HEADER_MERCHANT_CODE = "X-MERCHANT-CODE";
     public static final String X_HEADER_SUPER_MERCHANT_ID = "X-SUPER-MERCHANT-ID";
+    public static final String X_HEADER_SUPER_MERCHANT_CODE = "X-SUPER-MERCHANT-CODE";
     public static final String HIBERNATE_UNIT_FILTER_NAME = "unitFilter";
+    public static final String HIBERNATE_PARAM_UNIT_ID = "unitId";
     public static final String HIBERNATE_MERCHANT_FILTER_NAME = "merchantFilter";
 
     public static final String APPLICATION_MIGRATION_USER = "MIGRATION_USER";
     public static final String APPLICATION_UNKNOWN_USER = "UNKNOWN_USER";
     public static final String APPLICATION_SORT_ORDER_DESC = "descend";
     public static final String APPLICATION_REPOSITORY_SUFFIX = "repository";
+    public static final String APPLICATION_FEIGN_CACHE = "feign-cache";
+    public static final String APPLICATION_CONTEXT_CACHE = "context-cache";
+
 
     public static final boolean APPLICATION_STATUS_ACTIVE = true;
     public static final boolean APPLICATION_STATUS_INACTIVE = false;
+
+    public static final int MENU_TYPE_PARENT = 1;
+    public static final int MENU_TYPE_CHILD = 2;
+
 
     public static final String APP_NAVIGATION_METHOD_CREATE = "/create";
     public static final String APP_NAVIGATION_METHOD_UPDATE = "/update";
@@ -26,9 +38,6 @@ public class ApplicationConstant {
     public static final String APP_NAVIGATION_METHOD_READ_PAGE = "/list";
     public static final String APP_NAVIGATION_METHOD_READ_ID_NAME_MAP = "/read-id-name-map";
     public static final String APP_NAVIGATION_METHOD_DELETE = "/delete";
-
-    public static final int MENU_TYPE_PARENT = 1;
-    public static final int MENU_TYPE_CHILD = 2;
 
     public static final String APP_NAVIGATION_API_DASHBOARD = "/dashboard";
     public static final String APP_NAVIGATION_API_MENU = "/menu";

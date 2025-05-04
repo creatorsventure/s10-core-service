@@ -26,5 +26,6 @@ public class CoreSecurityProperties {
     private Integer otpExpiryMins;
     private Integer defaultCacheExpiryMins;
     private Integer feignCacheExpiryMins;
+    private Integer contextCacheExpiryHrs;
 
 }
