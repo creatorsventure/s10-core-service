@@ -35,7 +35,7 @@ public abstract class GenericUnitEntity extends GenericEntity implements Seriali
     @PreUpdate
     public void setValuesFromContext() {
         if (this.unitId == null) { // Only if not already set manually
-            String ctxUnitId = RequestContext.get("unitId");
+            String ctxUnitId = RequestContext.getUnitId();
             if (ctxUnitId != null) {
                 this.unitId = ctxUnitId;
             }

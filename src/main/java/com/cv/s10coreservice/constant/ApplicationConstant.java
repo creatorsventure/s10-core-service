@@ -15,6 +15,7 @@ public class ApplicationConstant {
     public static final String HIBERNATE_UNIT_FILTER_NAME = "unitFilter";
     public static final String HIBERNATE_PARAM_UNIT_ID = "unitId";
     public static final String HIBERNATE_MERCHANT_FILTER_NAME = "merchantFilter";
+    public static final String HIBERNATE_PARAM_MERCHANT_ID = "merchantId";
 
     public static final String APPLICATION_MIGRATION_USER = "MIGRATION_USER";
     public static final String APPLICATION_UNKNOWN_USER = "UNKNOWN_USER";

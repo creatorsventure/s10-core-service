@@ -1,5 +1,7 @@
 package com.cv.s10coreservice.context;
 
+import com.cv.s10coreservice.constant.ApplicationConstant;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,5 +23,13 @@ public class RequestContext {
 
     public static void clear() {
         CONTEXT.remove();
+    }
+
+    public static String getUnitId() {
+        return CONTEXT.get().get(ApplicationConstant.HIBERNATE_PARAM_UNIT_ID);
+    }
+
+    public static String getMerchantId() {
+        return CONTEXT.get().get(ApplicationConstant.HIBERNATE_PARAM_MERCHANT_ID);
     }
 }

@@ -37,11 +37,11 @@ public abstract class GenericMerchantEntity extends GenericEntity implements Ser
     @PreUpdate
     public void setValuesFromContext() {
         if (this.unitId == null) { // Only if not already set manually
-            String ctxUnitId = RequestContext.get("unitId");
+            String ctxUnitId = RequestContext.getUnitId();
             if (ctxUnitId != null) {
                 this.unitId = ctxUnitId;
             }
-            String ctxMerchantId = RequestContext.get("merchantId");
+            String ctxMerchantId = RequestContext.getMerchantId();
             if (ctxMerchantId != null) {
                 this.unitId = ctxMerchantId;
             }
