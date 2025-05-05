@@ -25,8 +25,16 @@ public class RequestContext {
         CONTEXT.remove();
     }
 
+    public static void setUnitId(String value) {
+        CONTEXT.get().put(ApplicationConstant.HIBERNATE_PARAM_UNIT_ID, value);
+    }
+
     public static String getUnitId() {
         return CONTEXT.get().get(ApplicationConstant.HIBERNATE_PARAM_UNIT_ID);
+    }
+
+    public static void setMerchantId(String value) {
+        CONTEXT.get().put(ApplicationConstant.HIBERNATE_PARAM_MERCHANT_ID, value);
     }
 
     public static String getMerchantId() {
