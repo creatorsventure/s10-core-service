@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.context.ApplicationContext;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -26,74 +25,73 @@ public class APIServiceCaller {
     private final ObjectMapper objectMapper;
     private final ExceptionComponent exceptionComponent;
 
-    // Main dynamic call method (strict)
+    // ------------------ MAIN CALLERS ------------------
+
+    /**
+     * Calls a client function that returns a String (raw response body)
+     * and deserializes it to a non-generic type.
+     */
     public <C, R> R call(Class<C> clientClass,
-                         Function<C, ResponseEntity<String>> clientCall,
+                         Function<C, String> clientCall,
                          Class<R> responseType) {
         C client = applicationContext.getBean(clientClass);
-        ResponseEntity<String> response = clientCall.apply(client);
-        return parse(response, responseType);
+        String raw = clientCall.apply(client);
+        return parse(raw, responseType);
     }
 
+    /**
+     * Calls a client function that returns a String (raw response body)
+     * and deserializes it to a generic type (e.g. List<MyDto>).
+     */
     public <C, R> R call(Class<C> clientClass,
-                         Function<C, ResponseEntity<String>> clientCall,
+                         Function<C, String> clientCall,
                          TypeReference<R> responseTypeRef) {
         C client = applicationContext.getBean(clientClass);
-        ResponseEntity<String> response = clientCall.apply(client);
-        return parse(response, responseTypeRef);
+        String raw = clientCall.apply(client);
+        return parse(raw, responseTypeRef);
     }
 
-    // Optional-call wrapper for non-generic types
+    /**
+     * Optional version of the above (non-generic)
+     */
     public <C, R> Optional<R> callOptional(Class<C> clientClass,
-                                           Function<C, ResponseEntity<String>> clientCall,
+                                           Function<C, String> clientCall,
                                            Class<R> responseType) {
         try {
             C client = applicationContext.getBean(clientClass);
-            ResponseEntity<String> response = clientCall.apply(client);
-            return parseOptional(response, responseType);
+            String raw = clientCall.apply(client);
+            return parseOptional(raw, responseType);
         } catch (Exception ex) {
-            log.warn("🔸 callOptional non-generic types failed: {}", ExceptionUtils.getStackTrace(ex));
+            log.warn("🔸 callOptional failed (Class): {}", ExceptionUtils.getStackTrace(ex));
             return Optional.empty();
         }
     }
 
-    // Optional-call wrapper for generic types
+    /**
+     * Optional version of the above (generic)
+     */
     public <C, R> Optional<R> callOptional(Class<C> clientClass,
-                                           Function<C, ResponseEntity<String>> clientCall,
+                                           Function<C, String> clientCall,
                                            TypeReference<R> responseTypeRef) {
         try {
             C client = applicationContext.getBean(clientClass);
-            ResponseEntity<String> response = clientCall.apply(client);
-            return parseOptional(response, responseTypeRef);
+            String raw = clientCall.apply(client);
+            return parseOptional(raw, responseTypeRef);
         } catch (Exception ex) {
-            log.warn("🔸 callOptional generic types failed: {}", ExceptionUtils.getStackTrace(ex));
+            log.warn("🔸 callOptional failed (Generic): {}", ExceptionUtils.getStackTrace(ex));
             return Optional.empty();
         }
     }
 
-    // ---- Parse section (strict) ----
+    // ------------------ PARSE METHODS ------------------
 
-    public <T> T parse(ResponseEntity<String> response, Class<T> clazz) {
-        return parse(response.getBody(), clazz);
-    }
-
-    public <T> T parse(ResponseEntity<String> response, TypeReference<T> typeRef) {
-        return parse(response::getBody, typeRef);
-    }
-
-    public <T> T parse(Supplier<String> supplier, Class<T> clazz) {
-        return parse(supplier.get(), clazz);
-    }
-
-    public <T> T parse(Supplier<String> supplier, TypeReference<T> typeRef) {
-        JavaType javaType = objectMapper.getTypeFactory().constructType(typeRef.getType());
-        return parse(supplier.get(), javaType);
-    }
-
+    /**
+     * Parses raw JSON to a non-generic type (e.g. MyDto).
+     */
     public <T> T parse(String response, Class<T> responseType) {
         try {
             APIResponseDto apiResponseDto = objectMapper.readValue(response, APIResponseDto.class);
-            log.debug("✅ Parsed API response DTO (Class): {}", apiResponseDto);
+            log.debug("✅ Parsed API response (Class): {}", apiResponseDto);
             if (apiResponseDto.isStatus()) {
                 JsonNode objectNode = objectMapper.valueToTree(apiResponseDto.getObject());
                 return objectMapper.treeToValue(objectNode, responseType);
@@ -101,44 +99,51 @@ public class APIServiceCaller {
                 throw exceptionComponent.expose("app.message.internal.api.failure", true);
             }
         } catch (Exception ex) {
-            log.error("❌ Failed to parse API response (Class): {}", ExceptionUtils.getStackTrace(ex));
+            log.error("❌ Failed to parse response (Class): {}", ExceptionUtils.getStackTrace(ex));
             throw exceptionComponent.expose("app.message.internal.api.failure", true);
         }
     }
 
-    public <T> T parse(String response, JavaType responseType) {
+    /**
+     * Parses raw JSON to a generic type (e.g. List<MyDto> or Map<String, Object>)
+     */
+    public <T> T parse(String response, TypeReference<T> typeRef) {
+        try {
+            JavaType javaType = objectMapper.getTypeFactory().constructType(typeRef.getType());
+            return parse(response, javaType);
+        } catch (Exception ex) {
+            log.error("❌ Failed to construct JavaType for parsing (TypeRef): {}", ExceptionUtils.getStackTrace(ex));
+            throw exceptionComponent.expose("app.message.internal.api.failure", true);
+        }
+    }
+
+    /**
+     * Generic version using Jackson's JavaType for full control
+     */
+    public <T> T parse(String response, JavaType javaType) {
         try {
             APIResponseDto apiResponseDto = objectMapper.readValue(response, APIResponseDto.class);
-            log.debug("✅ Parsed API response DTO (JavaType): {}", apiResponseDto);
+            log.debug("✅ Parsed API response (JavaType): {}", apiResponseDto);
             if (apiResponseDto.isStatus()) {
-                return objectMapper.convertValue(apiResponseDto.getObject(), responseType);
+                return objectMapper.convertValue(apiResponseDto.getObject(), javaType);
             } else {
                 throw exceptionComponent.expose("app.message.internal.api.failure", true);
             }
         } catch (Exception ex) {
-            log.error("❌ Failed to parse API response (JavaType): {}", ExceptionUtils.getStackTrace(ex));
+            log.error("❌ Failed to parse response (JavaType): {}", ExceptionUtils.getStackTrace(ex));
             throw exceptionComponent.expose("app.message.internal.api.failure", true);
         }
     }
 
-    // ---- Optional parse section ----
+    // ------------------ OPTIONAL PARSE METHODS ------------------
 
-    public <T> Optional<T> parseOptional(ResponseEntity<String> response, Class<T> clazz) {
-        return parseOptional(response.getBody(), clazz);
-    }
-
-    public <T> Optional<T> parseOptional(ResponseEntity<String> response, TypeReference<T> typeRef) {
-        return parseOptional(response::getBody, typeRef);
-    }
-
-    public <T> Optional<T> parseOptional(Supplier<String> supplier, TypeReference<T> typeRef) {
-        return parseOptional(supplier.get(), typeRef);
-    }
-
+    /**
+     * Parses and returns an Optional for non-generic type.
+     */
     public <T> Optional<T> parseOptional(String response, Class<T> responseType) {
         try {
             APIResponseDto apiResponseDto = objectMapper.readValue(response, APIResponseDto.class);
-            log.debug("✅ Parsed API response DTO (Optional/Class): {}", apiResponseDto);
+            log.debug("✅ Parsed API response (Optional/Class): {}", apiResponseDto);
             if (apiResponseDto.isStatus() && apiResponseDto.getObject() != null) {
                 JsonNode objectNode = objectMapper.valueToTree(apiResponseDto.getObject());
                 T result = objectMapper.treeToValue(objectNode, responseType);
@@ -150,11 +155,14 @@ public class APIServiceCaller {
         return Optional.empty();
     }
 
+    /**
+     * Parses and returns an Optional for generic types.
+     */
     public <T> Optional<T> parseOptional(String response, TypeReference<T> typeRef) {
         try {
             JavaType javaType = objectMapper.getTypeFactory().constructType(typeRef.getType());
             APIResponseDto apiResponseDto = objectMapper.readValue(response, APIResponseDto.class);
-            log.debug("✅ Parsed API response DTO (Optional/Generic): {}", apiResponseDto);
+            log.debug("✅ Parsed API response (Optional/Generic): {}", apiResponseDto);
             if (apiResponseDto.isStatus() && apiResponseDto.getObject() != null) {
                 T result = objectMapper.convertValue(apiResponseDto.getObject(), javaType);
                 return Optional.ofNullable(result);
@@ -163,5 +171,15 @@ public class APIServiceCaller {
             log.warn("🔸 Failed to parse optional response (Generic): {}", ExceptionUtils.getStackTrace(ex));
         }
         return Optional.empty();
+    }
+
+    // ------------------ SUPPLIER SHORTCUTS ------------------
+
+    public <T> T parse(Supplier<String> supplier, Class<T> clazz) {
+        return parse(supplier.get(), clazz);
+    }
+
+    public <T> T parse(Supplier<String> supplier, TypeReference<T> typeRef) {
+        return parse(supplier.get(), typeRef);
     }
 }
