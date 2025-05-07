@@ -27,5 +27,4 @@ public class CoreSecurityProperties {
     private Integer defaultCacheExpiryMins;
     private Integer feignCacheExpiryMins;
     private Integer contextCacheExpiryHrs;
-
 }
