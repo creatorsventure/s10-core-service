@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s10-core-service</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
     <name>s10-core-service</name>
     <description>s10-core-service</description>
     <url/>
@@ -89,6 +89,11 @@
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk18on</artifactId>
             <version>${bouncycastle.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk18on</artifactId>
+            <version>${bouncycastle.version}</version> <!-- Ensure this matches your bcprov version -->
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

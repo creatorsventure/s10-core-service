@@ -15,7 +15,6 @@ public class StaticUtil {
     }
 
     private static boolean initialized = false;
-
     public static synchronized boolean registerBouncyCastle() {
         if (!initialized && Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
             Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
