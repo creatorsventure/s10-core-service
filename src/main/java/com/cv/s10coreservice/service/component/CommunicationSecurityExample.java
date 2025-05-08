@@ -95,7 +95,7 @@ public class CommunicationSecurityExample {
 
         String encryptedPrivateKeyPEM = Files.readString(Path.of("merchant1-private.pem"));
         PrivateKey merchantPrivateKey = security.loadPrivateKeyFromEncryptedPEM(encryptedPrivateKeyPEM, PASSWORD);
-        X509Certificate bankCert = security.parseCertificateFromPEM(Files.readString(Path.of("bank-root-cert.pem")));
+        X509Certificate bankCert = security.fromPEM(Files.readString(Path.of("bank-root-cert.pem")));
 
         String signature = security.sign(message, merchantPrivateKey);
         String encrypted = security.encrypt(message, bankCert.getPublicKey());
@@ -114,8 +114,8 @@ public class CommunicationSecurityExample {
 
         String encryptedPrivateKeyPEM = Files.readString(Path.of("bank-root-private.pem"));
         PrivateKey bankPrivateKey = security.loadPrivateKeyFromEncryptedPEM(encryptedPrivateKeyPEM, PASSWORD);
-        X509Certificate bankCert = security.parseCertificateFromPEM(Files.readString(Path.of("bank-root-cert.pem")));
-        X509Certificate merchantCert = security.parseCertificateFromPEM(Files.readString(Path.of("bank-signed-merchant1-cert.pem")));
+        X509Certificate bankCert = security.fromPEM(Files.readString(Path.of("bank-root-cert.pem")));
+        X509Certificate merchantCert = security.fromPEM(Files.readString(Path.of("bank-signed-merchant1-cert.pem")));
 
         String decrypted = security.decrypt(encrypted, bankPrivateKey);
         boolean verified = security.verify(decrypted, signature, bankCert, merchantCert);

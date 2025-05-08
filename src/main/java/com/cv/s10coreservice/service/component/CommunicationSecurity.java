@@ -130,6 +130,26 @@ public class CommunicationSecurity {
         }
     }
 
+    public String generateCertificatePem(KeyPair keyPair,
+                                         String commonName,
+                                         String organization,
+                                         String organizationalUnit,
+                                         String locality,
+                                         String state,
+                                         String country,
+                                         String email,
+                                         int validityYears) throws CertificateEncodingException {
+        return toPEM(generateCertificate(keyPair,
+                commonName,
+                organization,
+                organizationalUnit,
+                locality,
+                state,
+                country,
+                email,
+                validityYears));
+    }
+
     public X509Certificate signCSR(KeyPair issuerKeyPair, X509Certificate issuerCert, PublicKey consumerPublicKey, String consumerDn, int validityDays) {
         try {
             Date start = new Date();
@@ -176,7 +196,7 @@ public class CommunicationSecurity {
         return "-----BEGIN CERTIFICATE-----\n" + BASE64_ENCODER.encodeToString(cert.getEncoded()) + "\n-----END CERTIFICATE-----";
     }
 
-    public X509Certificate parseCertificateFromPEM(String pem) throws CertificateException {
+    public X509Certificate fromPEM(String pem) throws CertificateException {
         byte[] decoded = BASE64_DECODER.decode(cleanPem(pem));
         return (X509Certificate) certificateFactory.generateCertificate(new ByteArrayInputStream(decoded));
     }
