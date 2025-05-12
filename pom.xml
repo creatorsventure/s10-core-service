@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.cv</groupId>
     <artifactId>s10-core-service</artifactId>
-    <version>0.0.10-SNAPSHOT</version>
+    <version>0.0.12-SNAPSHOT</version>
     <name>s10-core-service</name>
     <description>s10-core-service</description>
     <url/>
@@ -31,11 +31,7 @@
         <maven.build.timestamp.format>ddMMyyyyHHmmss</maven.build.timestamp.format>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <org.projectlombok.version>1.18.36</org.projectlombok.version>
-        <bouncycastle.version>1.80</bouncycastle.version>
-        <jwt.version>0.11.5</jwt.version>
-        <google-auth-version>1.5.0</google-auth-version>
-        <google-zxing-version>3.5.3</google-zxing-version>
-        <spring-cloud.version>2024.0.1</spring-cloud.version>
+        <google-lib.phone.version>8.12.45</google-lib.phone.version>
     </properties>
     <distributionManagement>
         <repository>
@@ -83,49 +79,7 @@
         <dependency>
             <groupId>com.googlecode.libphonenumber</groupId>
             <artifactId>libphonenumber</artifactId>
-            <version>8.12.45</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId>
-            <version>${bouncycastle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk18on</artifactId>
-            <version>${bouncycastle.version}</version> <!-- Ensure this matches your bcprov version -->
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>${jwt.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId> <!-- for JSON parsing -->
-            <version>${jwt.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.warrenstrange</groupId>
-            <artifactId>googleauth</artifactId>
-            <version>${google-auth-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>${google-zxing-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>${google-zxing-version}</version>
+            <version>${google-lib.phone.version}</version>
         </dependency>
     </dependencies>
 
